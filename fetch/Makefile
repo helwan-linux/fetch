@@ -1,17 +1,12 @@
-# إعدادات المترجمات
+# المترجمات
 CC = gcc
 AS = nasm
 
-# أعلام المترجم (CFLAGS): 
-# -Wall لبيان التحذيرات، -O2 للتحسين، -no-pie لحل مشكلة الربط مع الأسمبلي
+# الإعدادات: -no-pie ضروري لربط الأسمبلي بنجاح في التوزيعات الحديثة
 CFLAGS = -Wall -O2 -no-pie
 ASFLAGS = -f elf64
 
-# اسم البرنامج النهائي
-TARGET = helfetch
-
-# قائمة ملفات الكائنات (Objects)
-# يتم إضافة أي خدمة جديدة هنا وسيتكفل الماك ببنائها تلقائياً
+# قائمة ملفات الـ Objects (كل ميزة في ملف)
 OBJ = main.o \
       cpu_info.o \
       os_info.o \
@@ -25,32 +20,30 @@ OBJ = main.o \
       gpu_info.o \
       power_info.o
 
-# الهدف الرئيسي (Default Target)
+TARGET = helfetch
+
+# الهدف الافتراضي
 all: $(TARGET)
 
-# قاعدة ربط الملفات ببعضها لإنتاج البرنامج التنفيذي
+# ربط كل الوحدات لإنتاج البرنامج النهائي
 $(TARGET): $(OBJ)
-	@echo "Linking all modules to create $(TARGET)..."
+	@echo "Linking all modules for Helwan Linux..."
 	$(CC) $(OBJ) -no-pie -o $(TARGET)
-	@echo "Build complete! Run it with: ./$(TARGET)"
+	@echo "Success! Run with ./helfetch"
 
-# قاعدة ذكية لتحويل أي ملف .c إلى .o
+# قاعدة بناء ملفات C
 %.o: %.c
-	@echo "Compiling C module: $<"
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# قاعدة ذكية لتحويل أي ملف .asm إلى .o
+# قاعدة بناء ملفات Assembly
 %.o: %.asm
-	@echo "Assembling ASM module: $<"
 	$(AS) $(ASFLAGS) $< -o $@
 
-# تنظيف المجلد من ملفات البناء المؤقتة
+# التنظيف
 clean:
-	@echo "Cleaning up object files and executable..."
 	rm -f *.o $(TARGET)
-	@echo "Done."
 
-# إعادة البناء من الصفر
+# إعادة بناء شاملة
 rebuild: clean all
 
 .PHONY: all clean rebuild
