@@ -1,12 +1,10 @@
-# المترجمات
+# Helwan Linux Fetch Makefile
 CC = gcc
 AS = nasm
-
-# الإعدادات: -no-pie ضروري لربط الأسمبلي بنجاح في التوزيعات الحديثة
 CFLAGS = -Wall -O2 -no-pie
 ASFLAGS = -f elf64
 
-# قائمة ملفات الـ Objects (كل ميزة في ملف)
+# قائمة الكائنات (Objects)
 OBJ = main.o \
       cpu_info.o \
       os_info.o \
@@ -22,28 +20,27 @@ OBJ = main.o \
 
 TARGET = helfetch
 
-# الهدف الافتراضي
+# القاعدة الافتراضية
 all: $(TARGET)
 
-# ربط كل الوحدات لإنتاج البرنامج النهائي
+# الربط النهائي
 $(TARGET): $(OBJ)
-	@echo "Linking all modules for Helwan Linux..."
+	@echo "Linking all high-performance modules..."
 	$(CC) $(OBJ) -no-pie -o $(TARGET)
-	@echo "Success! Run with ./helfetch"
+	@echo "Done! helfetch is ready."
 
-# قاعدة بناء ملفات C
+# تجميع ملفات C
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# قاعدة بناء ملفات Assembly
+# تجميع ملفات الأسمبلي
 %.o: %.asm
 	$(AS) $(ASFLAGS) $< -o $@
 
-# التنظيف
+# التنظيف وإعادة البناء
 clean:
 	rm -f *.o $(TARGET)
 
-# إعادة بناء شاملة
 rebuild: clean all
 
 .PHONY: all clean rebuild
