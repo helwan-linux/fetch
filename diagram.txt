@@ -1,0 +1,19 @@
+https://github.com/helwan-linux/fetch
+
+
+📁 fetch/
+├── 📄 Makefile
+├── 📄 bus_info.asm
+├── 📄 cpu_features.asm
+├── 📄 cpu_info.asm
+├── 📄 disk_info.c
+├── 📄 extra_info.c
+├── 📄 gpu_info.c
+├── 📄 hw_extra.c
+├── 📄 main.c
+├── 📄 mem_info.c
+├── 📄 os_info.c
+├── 📄 pkg_info.c
+├── 📄 power_info.c
+├── 📄 time_info.c
+└── 📄 update_info.c
