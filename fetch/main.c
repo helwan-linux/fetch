@@ -99,9 +99,11 @@ int main() {
     printf("\033[1;34m      | | | |     \033[1;33m Boot:     \033[0m%s\n", boot);
     printf("\033[1;34m      | | | |     \033[1;33m Packages: \033[0m%d (pacman)\n", count_pacman_pkgs());
     printf("\033[1;34m      |_| |_|     \033[1;33m Memory:   \033[0m%s\n", mem);
+    printf("\033[1;34m      |_| |_|     \033[1;33m Disk:     \033[0m%s\n", disk);
     printf("\n");
     printf("\033[1;34m                  \033[1;33m CPU:      \033[0m%s\n", trimmed_cpu);
     printf("\033[1;34m                  \033[1;33m GPU:      \033[0m%s\n", gpu);
+    printf("\033[1;34m                  \033[1;33m Battery:  \033[0m%s\n", bat);
     printf("\033[1;34m                  \033[1;33m Features: \033[0m%s\n", features[0] ? features : "Standard x86_64");
     printf("\033[1;34m                  \033[1;33m Microcode:\033[0m %s\n", microcode);
     printf("\033[1;34m                  \033[1;33m GCC:      \033[0m%s\n", gcc_v);
