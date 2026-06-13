@@ -2,8 +2,8 @@
 # Project: Helwan Linux System Fetch Tool 
 
 pkgname=helfetch
-pkgver=1.0.0
-pkgrel=1
+pkgver=1.0.3
+pkgrel=3
 pkgdesc="A high-performance system information tool written in C and x86_64 Assembly for Helwan Linux "
 arch=('x86_64')
 url="https://github.com/helwan-linux/fetch" 
