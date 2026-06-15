@@ -70,6 +70,17 @@ void get_microcode(char *buffer) {
 int main() {
     char cpu[49], kernel[64], features[128], mem[128], disk[64], uptime[64];
     char gpu[64], bat[64], entropy[32], microcode[32], last_upd[32], boot[32], gcc_v[32];
+    char vendor[64] = "Unknown", model[64] = "Unknown"; // تعريف المتغيرات الجديدة
+    
+    // 2. إضافة كود جلب بيانات الجهاز (قبل عمليات العرض)
+    FILE *fv = fopen("/sys/class/dmi/id/sys_vendor", "r");
+    if (fv) { if (fgets(vendor, sizeof(vendor), fv)) vendor[strcspn(vendor, "\n")] = 0; fclose(fv); }
+    
+    FILE *fm = fopen("/sys/class/dmi/id/product_name", "r");
+    if (fm) { if (fgets(model, sizeof(model), fm)) model[strcspn(model, "\n")] = 0; fclose(fm); }
+
+    // تنفيذ باقي عمليات جلب البيانات الموجودة أصلاً عندك
+    get_cpu_brand_asm(cpu);
     
     // تنفيذ كافة عمليات جلب البيانات
     get_cpu_brand_asm(cpu);
@@ -93,6 +104,7 @@ int main() {
     // واجهة العرض النهائية الاحترافية لـ Helwan Linux
     printf("\n");
     printf("\033[1;34m       _   _      \033[1;33m OS:       \033[0mHelwan Linux\n");
+    printf("\033[1;34m      | | | |      \033[1;33m Host:     \033[0m%s %s\n", vendor, model);
     printf("\033[1;34m      | | | |     \033[1;33m Kernel:   \033[0m%s\n", kernel);
     printf("\033[1;34m      | |_| |     \033[1;33m Uptime:   \033[0m%s\n", uptime);
     printf("\033[1;34m      |  _  |     \033[1;33m Updated:  \033[0m%s\n", last_upd);
